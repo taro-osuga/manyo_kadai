@@ -22,13 +22,15 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
+
   
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do
       visit new_task_path
+      fill_in "タイトル", with: 'Factoryで作ったデフォルトのタイトル１'
+      fill_in "内容", with: 'Factoryで作ったデフォルトのコンテント1'
       click_button '登録する'
-      byebug
       expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
       expect(page).to have_content 'Factoryで作ったデフォルトのコンテント1'
     end
@@ -39,11 +41,11 @@ RSpec.describe 'タスク管理機能', type: :system do
        it '該当タスクの内容が表示されたページに遷移する' do
         visit tasks_path
         click_link 'タスク作成'
-        fill_in "Title", with: 'title'
-        fill_in "Content", with: 'content'
+        fill_in "タイトル", with: 'Factoryで作ったデフォルトのタイトル１'
+        fill_in "内容", with: 'Factoryで作ったデフォルトのコンテント1'
         click_button '登録する'
-        expect(page).to have_content 'title'
-        expect(page).to have_content 'content'
+        expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+        expect(page).to have_content 'Factoryで作ったデフォルトのコンテント1'
        end
      end
     end
