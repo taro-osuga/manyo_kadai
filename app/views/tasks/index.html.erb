@@ -5,7 +5,7 @@
   <%= form.text_field :title ,placeholder:"タイトル検索"%>
   <%= form.select :status, [["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], prompt: "ステータス選択"%>
   <%= form.hidden_field :search, value: 'true' %>
-  <%= form.submit 'Search', name: nil %>
+  <%= form.submit '検索', name: nil %>
 <% end %>
 
 <table>
@@ -26,7 +26,7 @@
     <td><%= task.content %></td>
     <td><%= task.created_at %></td>
     <td><%= task.end_date %></td>
-    <td><%= task.status %></td>
+    <td class="status"><%= task.status %></td>
     <td><%= link_to '詳細', task_path(task.id) %></td>
     <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
     <td><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
