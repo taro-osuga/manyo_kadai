@@ -17,6 +17,14 @@
     <%= form.label :content %>
     <%= form.text_area :content %>
   </div>
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.date_field :end_date %>
+  </div>
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select(:status, options_for_select([["ステータス", ""],["未着手","未着手"],["着手中","着手中"],["完了","完了"]]))%>
+  </div>
   <%= form.submit %>
 <% end %>
 
