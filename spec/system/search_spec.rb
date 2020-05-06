@@ -34,5 +34,26 @@ RSpec.describe 'タスク管理機能', type: :system do
           expect(find(".status")).to have_content "着手中"
         end
       end
+      context '終了期限でソートをした場合' do
+        it "並び替えできる" do
+          visit tasks_path
+          click_link '終了期限でソートする'
+          task_list = all('tbody tr') 
+          expect(task_list[0]).to have_content '2020-05-05'
+          expect(task_list[1]).to have_content '2020-05-06'
+          expect(task_list[2]).to have_content '2020-05-07'
+        end
+      end
+    
+      context '重要度でソートをした場合' do
+        it "並び替えできる" do
+          visit tasks_path
+          click_link '優先順位でソートする'
+          task_list = all('tbody tr') 
+          expect(task_list[0]).to have_content '高'
+          expect(task_list[1]).to have_content '中'
+          expect(task_list[2]).to have_content '下'
+        end
+      end
     end
 end
