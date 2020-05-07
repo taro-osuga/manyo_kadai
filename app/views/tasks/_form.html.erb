@@ -1,3 +1,6 @@
+<div class="border col-7">
+  <div class="row">
+    <div class="col-md">
 <%= form_with(model: @task, local: true) do |form| %>
   <% if @task.errors.any? %>
     <div id="error_explanation">
@@ -9,27 +12,34 @@
       </ul>
     </div>
   <% end %>
+  <div class="container">
   <div class="title">
     <%= form.label :title %>
-    <%= form.text_field :title %>
+    <%= form.text_field :title , class: 'form-control'%>
   </div>
   <div class="content">
     <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.text_area :content , class: 'form-control'%>
   </div>
   <div class="field">
     <%= form.label :end_date %>
-    <%= form.date_field :end_date %>
+    <%= form.date_field :end_date , class: 'form-control'%>
   </div>
   <div class="field">
     <%= form.label :status %>
-    <%= form.select(:status, options_for_select([["未着手","未着手"],["着手中","着手中"],["完了","完了"]]))%>
+    <%= form.select(:status, options_for_select([["未着手","未着手"],["着手中","着手中"],["完了","完了"]]), {}, {class: "form-control"})%>
   </div>
     <div class="field">
     <%= form.label :priority %>
-    <%= form.select :priority, Task.priorities.keys.to_a, include_blank: true %>
+    <%= form.select :priority, Task.priorities.keys.to_a, include_blank: true , class: "form-control"%>
   </div>
   <%= form.submit %>
+          </div>
+        </div>
+        <br>
+  </div>
 <% end %>
 
-<%= link_to 'タスク一覧画面に戻る', tasks_path %>
+<%= link_to 'タスク一覧画面に戻る', tasks_path ,class: "btn btn-info"%>
+</div>
+<body>

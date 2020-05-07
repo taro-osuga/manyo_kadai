@@ -13,7 +13,7 @@ ja:
         now: 着手中
         done: 完了
         search: 検索
-        priority: 優先度
+        priority: 優先順位
       user:
         title: タイトル
         name: 名前
