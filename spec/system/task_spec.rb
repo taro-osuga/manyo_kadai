@@ -10,7 +10,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
         visit tasks_path
-        expect(page).to have_content 'task'
+        expect(page).to have_content 'タイトル'
       end
     end
     context '複数のタスクを作成した場合' do
