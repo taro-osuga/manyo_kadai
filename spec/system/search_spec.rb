@@ -30,7 +30,6 @@ RSpec.describe 'タスク管理機能', type: :system do
           select '着手中', from: 'status'
           click_button '検索'
           expect(page).to have_content 'タイトル3'
-          # expect(find(".status")).to have_content "着手中"
         end
       end
       context '終了期限でソートをした場合', :retry => 3 do
