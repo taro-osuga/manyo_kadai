@@ -26,10 +26,13 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'kaminari'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
-
+gem "sass-rails", "~>5.0"
+gem "bootstrap-sass", "~>3.3.6"
+gem "jquery-rails"
+gem "jquery-ui-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -41,6 +44,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 4.0.0'
   gem 'factory_bot_rails'
+  gem 'rspec-retry'
 end
 
 group :development do
