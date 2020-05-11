@@ -4,13 +4,12 @@ class UsersController < ApplicationController
     before_action :ensure_correct_user, {only: [:show, :edit, :update]}
 
     def new
-            @user = User.new
+        @user = User.new
     end
     
     def create
         @user = User.new(user_params)
         if @user.save
-            log_in @user
             redirect_to user_path(@user.id)
         else
             render :new
@@ -25,6 +24,15 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end
 
+    def update
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+            redirect_to user_path, notice: "ユーザー情報を修正しました"
+        else
+            render :edit
+        end
+    end
+
     private
     def user_params
         params.require(:user).permit(:name, :email, :password,
@@ -37,4 +45,5 @@ class UsersController < ApplicationController
           redirect_to tasks_path
         end
     end
+    
 end

@@ -1,0 +1,56 @@
+<h1><%= @user.name %>のページ</h1>
+<p>メールアドレス: <%= @user.email %></p>
+<p><%= @user.admin? ? '管理ユーザー' : '一般ユーザー' %></p>
+
+<br>
+<h2>タスク一覧</h2>
+<br>
+<%= form_with url: admin_user_path, method: :get, local: true do |form| %>
+  <%= form.text_field :title ,placeholder:"タイトル検索"%>
+  <%= form.select :status, [["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], prompt: "ステータス選択"%>
+  <%= form.hidden_field :search, value: 'true' %>
+  <%= form.submit '検索', name: nil %>
+<% end %>
+<br>
+<table class="table table-bordered">
+<thead>
+  <tr class="active">
+    <th>タイトル</th>
+    <th>内容</th>
+    <th>作成日</th>
+    <th>終了期限</th>
+    <th>ステータス</th>
+    <th>優先順位</th>
+    <th>投稿者</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  
+</thead>
+<tbody>
+<% @tasks.each do |task| %>
+  <tr>
+    <td><%= task.title %></td>
+    <td><%= task.content %></td>
+    <td><%= task.created_at %></td>
+    <td><%= task.end_date %></td>
+    <td><%= task.status %></td>
+    <td><%= task.priority %></td>
+    <td><%= task.user.name %></td>
+    <td><%= link_to '詳細', task_path(task.id) %></td>
+    <td><%= link_to '編集', edit_task_path(task.id), data: { confirm: '本当に編集していいですか？' } %></td>
+    <td><%= link_to '削除', task_path(task.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<%= paginate @tasks %>
+<br>
+<%= link_to 'タスク作成', new_task_path, class:"btn btn-primary"%>
+<%= link_to "終了期限でソートする", admin_user_path(sort_expired: :true), class: "btn btn-warning"%> 
+<%= link_to "優先順位でソートする", admin_user_path(sort_priority: :true), class: "btn btn-warning"%>
+
+<% if current_user.admin? %>
+	<%= link_to "管理者画面へ", admin_users_path,class: "btn btn-info"%>
+<% end %>
