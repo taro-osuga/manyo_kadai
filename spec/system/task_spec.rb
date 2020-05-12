@@ -2,8 +2,9 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
 
   before do
-    FactoryBot.create(:task)
-    FactoryBot.create(:second_task)
+    FactoryBot.create(:user)
+    FactoryBot.create(:task, user: user)
+    FactoryBot.create(:second_task, user: user)
   end
 
   describe 'タスク一覧画面' do

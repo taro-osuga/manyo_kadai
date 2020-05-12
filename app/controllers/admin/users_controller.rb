@@ -18,13 +18,13 @@ class Admin::UsersController < ApplicationController
 
     def show
       @user = User.find(params[:id])
-      if params[:sort_expired] 
-        @tasks = @user.tasks.order(end_date: :asc).page(params[:page]).per(PER)
-      elsif params[:sort_priority] 
-        @tasks = @user.tasks.order(priority: :asc).page(params[:page]).per(PER)
-      else
-        @tasks = @user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
-      end
+        if params[:sort_expired] 
+          @tasks = @user.tasks.order(end_date: :asc).page(params[:page]).per(PER)
+        elsif params[:sort_priority] 
+          @tasks = @user.tasks.order(priority: :asc).page(params[:page]).per(PER)
+        else
+          @tasks = @user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
+        end
       if params[:search].present?
         if params[:title].present? && params[:status].present?
           @tasks = @user.tasks.search_title(params[:title]).search_status(params[:status]).page(params[:page]).per(PER)
@@ -48,7 +48,7 @@ class Admin::UsersController < ApplicationController
     def update
       @user = User.find(params[:id])
       if @user.update(user_params)
-          redirect_to admin_user_path(@user.id), notice: "ユーザー情報を修正しました"
+          redirect_to admin_users_path, notice: "ユーザー情報を修正しました"
       else
           render :edit
       end

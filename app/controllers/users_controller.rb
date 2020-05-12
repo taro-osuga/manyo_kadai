@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+    before_action :authenticate_user, {only: [:index,  :edit, :update]}
     before_action :user_logged_in, {only: [:new]}
     before_action :ensure_correct_user, {only: [:show, :edit, :update]}
 
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+            log_in @user
             redirect_to user_path(@user.id)
         else
             render :new

@@ -10,7 +10,7 @@ FactoryBot.define do
     id { 2 }
     name { 'admin' }
     email { 'admin@example.com' }
-    password { '00000000' }
+    password { '22222222' }
     admin { true }
   end
   factory :user2, class: User do

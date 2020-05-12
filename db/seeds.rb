@@ -5,11 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+array4 = ["true","false"]
 5.times do |n|
   User.create!(
     email: "test#{n + 1}@test.com",
     name: "test#{n + 1}@test.com",
     password: "test#{n + 1}@test.com",
+    admin: array4[rand(0..1)]
   )
 end
 

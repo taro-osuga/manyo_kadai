@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user
-  before_action :ensure_correct_user, {only: [:show, :edit, :update]}
+  before_action :ensure_correct_user, {only: [ :edit, :update]}
 
   PER = 10
 
@@ -32,7 +32,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
       redirect_to task_path(@task.id), notice: "タスクを作成しました"
     else
@@ -52,6 +52,7 @@ class TasksController < ApplicationController
   end
 
   def show
+    @task = Task.find(params[:id])
   end
 
   def destroy
