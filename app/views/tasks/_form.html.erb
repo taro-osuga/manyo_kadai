@@ -33,6 +33,17 @@
     <%= form.label :priority %>
     <%= form.select :priority, Task.priorities.keys.to_a, include_blank: true , class: "form-control"%>
   </div>
+  <div class="field">
+  <% Label.all.each do |label| %>
+      <% if action_name == 'new' || action_name == 'create' %>
+        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
+        <label><%= label.title %></label>
+      <% elsif action_name == 'edit' || action_name == 'update' %>
+        <%= form.check_box :label_ids, { multiple: true, checked: @task.label_ids.include?(label.id), disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
+        <label><%= label.title %></label>
+      <% end %>
+    <% end %>
+  </div>
   <%= form.submit %>
           </div>
         </div>

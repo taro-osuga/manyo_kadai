@@ -6,12 +6,17 @@
   <%= form.text_field :title ,placeholder:"タイトル検索"%>
   <%= form.select :status, [["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], prompt: "ステータス選択"%>
   <%= form.hidden_field :search, value: 'true' %>
+  <% Label.all.each do |label| %>
+    <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
+      <%= label.title %>
+  <% end %>
   <%= form.submit '検索', name: nil %>
 <% end %>
 <br>
 <table class="table table-bordered">
 <thead>
   <tr class="active">
+    <th>ラベル</th>
     <th>タイトル</th>
     <th>内容</th>
     <th>作成日</th>
@@ -28,6 +33,9 @@
 <tbody>
 <% @tasks.each do |task| %>
   <tr>
+    <td><% task.task_labels.each do |task_label| %>
+        <%= task_label.label.title %><br>
+    <% end %></td>
     <td><%= task.title %></td>
     <td><%= task.content %></td>
     <td><%= task.created_at %></td>
