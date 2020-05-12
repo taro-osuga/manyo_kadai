@@ -1,5 +1,5 @@
 <br>
-<h2>タスク一覧</h2>
+<h2><%= current_user.name %>のタスク一覧</h2>
 <br>
 
 <%= form_with url: tasks_path, method: :get, local: true do |form| %>
