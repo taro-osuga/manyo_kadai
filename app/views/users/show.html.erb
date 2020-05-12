@@ -1,0 +1,8 @@
+<h1><%= @user.name %>のページ</h1>
+<p>メールアドレス: <%= @user.email %></p>
+<%= link_to "ユーザー編集画面へ", edit_user_path(@user.id),class: "btn btn-info"%>
+<%= link_to 'タスク一覧画面へ', tasks_path ,class: "btn btn-info"%>
+
+<% if current_user.admin? %>
+	<%= link_to "管理者画面へ", admin_users_path,class: "btn btn-info"%>
+<% end %>

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  root 'tasks#index'
+  root 'sessions#new'
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:new, :create, :show, :edit, :update]
+  namespace :admin do
+    resources :users
+  end
   resources :tasks
 
-  # get 'search' to: 'tasks#search'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -10,6 +10,7 @@
     <th>終了期限</th>
     <th>ステータス</th>
     <th>優先順位</th>
+    <th>投稿者</th>
   </tr>
 </thead>
  <tbody>
@@ -20,6 +21,7 @@
     <td><%= @task.end_date %></td>
     <td><%= @task.status %></td>
     <td><%= @task.priority %></td>
+    <td><%= @task.user.name %></td>
   </tr>
 </tbody>
 </table>
