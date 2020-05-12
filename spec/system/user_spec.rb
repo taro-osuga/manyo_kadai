@@ -19,22 +19,22 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
   end
   describe 'セッション機能のテスト' do
     context 'ユーザのデータがありログインしていない場合' do
-      it 'ログインが出来ること''自分の詳細画面(マイページ)に飛べること' do
+      it 'ログインが出来ること'do
         FactoryBot.create(:user)
         visit new_session_path
         fill_in 'Email', with: 'sample@example.com'
         fill_in 'Password', with: '00000000'
         click_on 'Log in'
-        expect(page).to have_content 'sample'
+        expect(page).to have_content 'ログインしました'
       end
-      # it '自分の詳細画面(マイページ)に飛べること' do
-      #   FactoryBot.create(:user)
-      #   visit new_session_path
-      #   fill_in 'Email', with: 'sample@example.com'
-      #   fill_in 'Password', with: '00000000'
-      #   click_on 'Log in'
-      #   expect(page).to eq users_path(id: 1)
-      # end
+      it '自分の詳細画面(マイページ)に飛べること' do
+        FactoryBot.create(:user)
+        visit new_session_path
+        fill_in 'Email', with: 'sample@example.com'
+        fill_in 'Password', with: '00000000'
+        click_on 'Log in'
+        expect(page).to have_content 'sampleのページ'
+      end
       it '一般ユーザが他人の詳細画面に飛ぶとタスク一覧ページに遷移すること' do
         FactoryBot.create(:user)
         visit new_session_path
