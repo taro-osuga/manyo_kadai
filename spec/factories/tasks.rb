@@ -5,7 +5,7 @@ FactoryBot.define do
     end_date {'2020-05-05'}
     status {'未着手'}
     priority {:高}
-    user
+    user 
   end
   factory :second_task, class: Task do
     title { 'Factoryで作ったデフォルトのタイトル2' }
