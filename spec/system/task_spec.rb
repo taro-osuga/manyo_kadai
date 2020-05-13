@@ -15,33 +15,6 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   end
 
-  describe 'タスク登録画面' do
-    context '必要項目を入力して、createボタンを押した場合' do
-      it 'データが保存される' do
-      visit new_session_path
-      fill_in 'Email', with: 'sample@example.com'
-      fill_in 'Password', with: '00000000'
-      click_on 'Log in'
-      visit new_task_path
-      fill_in "タイトル", with: 'Factoryで作ったデフォルトのタイトル１'
-      fill_in "内容", with: 'Factoryで作ったデフォルトのコンテント1'
-      fill_in "終了期限", with:  Time.new(2020,6,20)
-      select '着手中', from: 'ステータス'
-      select '高', from: '優先順位'
-      find('#task_label_ids_1', visible: false).check
-      # check 'sample1'
-      click_button '登録する'
-      expect(page).to have_content 'タスクを作成しました'
-      expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
-      expect(page).to have_content 'Factoryで作ったデフォルトのコンテント1'
-      expect(page).to have_content '2020-06-20'
-      expect(page).to have_content '着手中'
-      expect(page).to have_content '高'
-      expect(page).to have_content 'sample1'
-    end
-    end
-  end
-
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示される' do
@@ -73,6 +46,34 @@ RSpec.describe 'タスク管理機能', type: :system do
           expect(task_list[1]).to have_content 'sample1'
         end
       end
-   end
+   end  
 
+   describe 'タスク登録画面' do
+    context '必要項目を入力して、createボタンを押した場合' do
+      it 'データが保存される' do
+      visit new_session_path
+      fill_in 'Email', with: 'sample@example.com'
+      fill_in 'Password', with: '00000000'
+      click_on 'Log in'
+      visit new_task_path
+      fill_in "タイトル", with: 'Factoryで作ったデフォルトのタイトル１'
+      fill_in "内容", with: 'Factoryで作ったデフォルトのコンテント1'
+      fill_in "終了期限", with:  Time.new(2020,6,20)
+      select '着手中', from: 'ステータス'
+      select '高', from: '優先順位'
+      # binding.irb
+      # find('#task_label_ids_1', visible: false).check
+      check 'sample1'
+      # check 'sample1'
+      click_button '登録する'
+      expect(page).to have_content 'タスクを作成しました'
+      expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
+      expect(page).to have_content 'Factoryで作ったデフォルトのコンテント1'
+      expect(page).to have_content '2020-06-20'
+      expect(page).to have_content '着手中'
+      expect(page).to have_content '高'
+      expect(page).to have_content 'sample1'
+    end
+    end
+  end
 end
