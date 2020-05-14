@@ -9,10 +9,8 @@
   <%= form.text_field :title ,placeholder:"タイトル検索"%>
   <%= form.select :status, [["未着手", "未着手"],["着手中","着手中"],["完了","完了"]], prompt: "ステータス選択"%>
   <%= form.hidden_field :search, value: 'true' %>
-  <% Label.all.each do |label| %>
-    <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false}, label[:id], "" %>
-      <%= label.title %>
-  <% end %>
+  <%= form.label :lebel %>   
+  <%= form.collection_check_boxes(:label_ids, Label.all, :id, :title) %>
   <%= form.submit '検索', name: nil %>
 <% end %>
 <br>

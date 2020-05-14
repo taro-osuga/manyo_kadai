@@ -61,10 +61,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       fill_in "終了期限", with:  Time.new(2020,6,20)
       select '着手中', from: 'ステータス'
       select '高', from: '優先順位'
-      # binding.irb
-      # find('#task_label_ids_1', visible: false).check
       check 'sample1'
-      # check 'sample1'
+      check 'sample2'
       click_button '登録する'
       expect(page).to have_content 'タスクを作成しました'
       expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
@@ -73,6 +71,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(page).to have_content '着手中'
       expect(page).to have_content '高'
       expect(page).to have_content 'sample1'
+      expect(page).to have_content 'sample2'
     end
     end
   end

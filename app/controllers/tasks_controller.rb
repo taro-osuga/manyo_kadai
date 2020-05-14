@@ -6,7 +6,6 @@ class TasksController < ApplicationController
   PER = 10
 
   def index
-
     if params[:sort_expired] 
       @tasks = current_user.tasks.order(end_date: :asc).page(params[:page]).per(PER)
     elsif params[:sort_priority] 
@@ -66,7 +65,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:title, :content, :end_date, :status, :priority, label_ids: [])
+    params.require(:task).permit(:title, :content, :end_date, :status, :priority, { label_ids: [] })
   end
   
   def set_task

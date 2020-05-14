@@ -34,7 +34,8 @@
       <%= form.select :priority, Task.priorities.keys.to_a, include_blank: true , class: "form-control"%>
     </div>
     <div class="field">
-      <div class="labels">      
+      <div class="labels">
+      <%= form.label :lebel %>   
       <%= form.collection_check_boxes(:label_ids, Label.all, :id, :title) %>
       </div>
     </div>
