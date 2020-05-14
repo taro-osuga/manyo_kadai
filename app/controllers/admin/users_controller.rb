@@ -25,15 +25,19 @@ class Admin::UsersController < ApplicationController
         else
           @tasks = @user.tasks.order(created_at: :desc).page(params[:page]).per(PER)
         end
-      if params[:search].present?
-        if params[:title].present? && params[:status].present?
-          @tasks = @user.tasks.search_title(params[:title]).search_status(params[:status]).page(params[:page]).per(PER)
-        elsif params[:title].present?
-          @tasks = @user.tasks.search_title(params[:title]).page(params[:page]).per(PER)
-        elsif params[:status].present?
-          @tasks = @user.tasks.search_status(params[:status]).page(params[:page]).per(PER)
+        if params[:search].present?
+          if params[:title].present? && params[:status].present? && params[:label_id].present?
+            @tasks = @user.tasks.search_title(params[:title]).search_status(params[:status]).page(params[:page]).per(PER)
+          elsif params[:title].present?
+            @tasks = @user.tasks.search_title(params[:title]).page(params[:page]).per(PER)
+          elsif params[:status].present?
+            @tasks = @user.tasks.search_status(params[:status]).page(params[:page]).per(PER)
+          elsif params[:label_ids].present?
+            @label_id = params[:label_ids]
+            @task_ids = TaskLabel.where(label_id: @label_id).pluck(:task_id)
+            @tasks = @user.tasks.search_labels(@task_ids).page(params[:page]).per(PER)
+          end
         end
-      end
     end
 
     def index

@@ -4,6 +4,7 @@
 <table class="table table-bordered">
 <thead>
   <tr class="active">
+    <th>ラベル</th>
     <th>タイトル</th>
     <th>内容</th>
     <th>作成日</th>
@@ -15,6 +16,9 @@
 </thead>
  <tbody>
   <tr>
+    <td><% @task.task_labels.each do |task_label| %>
+    <%= task_label.label.title %><br>
+    <% end %></td>
     <td><%= @task.title %></td>
     <td><%= @task.content %></td>
     <td><%= @task.created_at %></td>

@@ -30,3 +30,7 @@ array3 = ["2020-05-01","2020-05-02","2020-05-03","2020-05-04","2020-05-05"]
       user_id: array2[rand(0..4)]
     )
   end
+
+5.times do |i|
+  Label.create!(title: "sample#{i + 1}")
+end
