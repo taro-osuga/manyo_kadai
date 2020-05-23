@@ -31,6 +31,12 @@ array3 = ["2020-05-01","2020-05-02","2020-05-03","2020-05-04","2020-05-05"]
     )
   end
 
-5.times do |i|
+6.times do |i|
   Label.create!(title: "sample#{i + 1}")
+end
+
+array5 = ["1","2","3","4","5"]
+200.times do |i|
+  TaskLabel.create!(task_id:(i+1),label_id:array5[rand(0..1)])
+  TaskLabel.create!(task_id:(i+1),label_id:array5[rand(2..4)])
 end
